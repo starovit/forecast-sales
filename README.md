@@ -26,10 +26,10 @@ pyproject.toml # Poetry environment & dependencies
    poetry shell
    ```
 
-3. **Run the EDA notebook** in Jupyter:
+3. **Run any notebook** in Jupyter:
 
    ```
-   jupyter notebook notebooks/EDA.ipynb
+   jupyter notebook notebooks/*.ipynb
    ```
 
 ## Status

@@ -12,3 +12,8 @@ build/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Catboost
+*.tsv
+*.tfevents
+catboost_training.json
