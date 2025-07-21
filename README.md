@@ -44,3 +44,4 @@ pyproject.toml # Poetry environment & dependencies
 
 **Possible Next Steps:**
 * Seperate models for rare SKUs / frequent SKUs (mean for rare + boosting for frequent).
+* More category based features (can be usefull for rare SKUs)
