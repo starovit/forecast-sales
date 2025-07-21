@@ -17,3 +17,4 @@ build/
 *.tsv
 *.tfevents
 catboost_training.json
+catboost_info/
