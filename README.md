@@ -5,7 +5,7 @@ data/
   raw/         # Source data (CSVs)
 notebooks/
   EDA.ipynb    # Full exploratory analysis
-src/           # Future scripts and modeling code
+src/           # Scripts
 README.md      # Project overview
 pyproject.toml # Poetry environment & dependencies
 ```
@@ -35,9 +35,9 @@ pyproject.toml # Poetry environment & dependencies
 ## Status
 
 **Done:**
-* **EDA completed.**
-* **Simple models tested.**
+* EDA completed.
+* Simple models tested.
 
 **Next Steps:**
-* **Future prediction.**
-* **Seperate models for rare SKUs / frequent SKUs.**
+* Future prediction.
+* Seperate models for rare SKUs / frequent SKUs.
