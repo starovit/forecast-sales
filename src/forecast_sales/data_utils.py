@@ -1,5 +1,31 @@
 import pandas as pd
 
+
+def load_and_prepare_data(path, date_col='date', index_col=0, reset_index=True):
+    """
+    Load CSV to DataFrame, parse date, sort by date, and reset index.
+
+    Parameters
+    ----------
+    path : str
+        Path to CSV file.
+    date_col : str, default='date'
+        Name of the date column.
+    index_col : int or str, default=0
+        Index column in the CSV.
+
+    Returns
+    -------
+    pd.DataFrame
+        Prepared DataFrame.
+    """
+    df = pd.read_csv(path, index_col=index_col, parse_dates=[date_col])
+    df = df.sort_values(date_col)
+    if reset_index:
+        df = df.reset_index(drop=True)
+    return df
+    
+    
 def create_full_dataset(df):
     """
     Expand the DataFrame to include every SKU × date combination,

@@ -3,6 +3,7 @@
 ```
 data/
   raw/         # Source data (CSVs)
+results/       # Results data (predictions)
 notebooks/
   EDA.ipynb    # Full exploratory analysis
 src/           # Scripts

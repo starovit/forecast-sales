@@ -74,7 +74,7 @@ def add_date_categorical_features(df, date_col='date', prefix=''):
 
 def add_rolling_mean_features(
     df,
-    days=[15, 30, 60, 120, 365],
+    days=[15, 30, 60, 120, 365, 1000],
     columns=None,
     groupby='sku_id',
     date_col='date'
@@ -121,3 +121,39 @@ def add_rolling_mean_features(
     df = df.sort_values(date_col)
     return df, feature_names
 
+
+def features_pipeline(
+    df,
+    days=[15, 30, 60, 120, 365, 1000],
+    num_columns=['sales_quantity', 'sales_price']
+    ):
+    """
+    Adds main features for modeling:
+      - Holiday/adjacent indicator
+      - Date categorical features (dayofweek, month, quarter)
+      - Rolling mean sales and quantities features
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+    days : list of int
+        Rolling windows (in days)
+    num_columns: list of str
+        Columns for rolling mean 
+
+    Returns
+    -------
+    df : pd.DataFrame
+    cat_features : list of str
+        List of categorical features
+    all_features : list of str
+        List of all features
+    """
+    df = mark_holiday_adjacent(df)
+    df, date_feature_names = add_date_categorical_features(df)
+    df, rolling_feature_names = add_rolling_mean_features(df, days=days, columns=num_columns)
+    
+    cat_features = ["is_holiday_or_adjacent"] + date_feature_names 
+    all_features = cat_features + rolling_feature_names
+    
+    return df, cat_features, all_features
