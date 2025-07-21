@@ -52,21 +52,29 @@ def add_date_categorical_features(df, date_col='date', prefix=''):
     -------
     pd.DataFrame
         DataFrame with new categorical features.
+    list of str
+        Names of added rolling mean features.
     """
     df = df.copy()
     if not pd.api.types.is_datetime64_any_dtype(df[date_col]):
         df[date_col] = pd.to_datetime(df[date_col])
 
-    df[f'{prefix}dayofweek'] = df[date_col].dt.dayofweek.astype('category') # 0=Monday, 6=Sunday
-    df[f'{prefix}month'] = df[date_col].dt.month.astype('category') # 1..12
-    df[f'{prefix}quarter'] = df[date_col].dt.quarter.astype('category') # 1..4
+    dayofweek_name = f'{prefix}dayofweek'
+    month_name = f'{prefix}month'
+    quarter_name = f'{prefix}quarter'
 
-    return df
+    df[dayofweek_name] = df[date_col].dt.dayofweek.astype('category')  # 0=Monday, 6=Sunday
+    df[month_name] = df[date_col].dt.month.astype('category')          # 1..12
+    df[quarter_name] = df[date_col].dt.quarter.astype('category')      # 1..4
+
+    feature_names = [dayofweek_name, month_name, quarter_name]
+
+    return df, feature_names
 
 
 def add_rolling_mean_features(
     df,
-    days=[7, 14, 28, 56, 112, 224],
+    days=[15, 30, 60, 120, 365],
     columns=None,
     groupby='sku_id',
     date_col='date'

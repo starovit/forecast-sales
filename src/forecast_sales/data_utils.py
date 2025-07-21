@@ -1,4 +1,3 @@
-import holidays
 import pandas as pd
 
 def create_full_dataset(df):
