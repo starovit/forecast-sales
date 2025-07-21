@@ -37,8 +37,10 @@ pyproject.toml # Poetry environment & dependencies
 
 **Done:**
 * EDA completed.
-* Simple models tested.
+* Simple models tested
+* Feature generation scripts
+* Future prediction using CatBoost.
 
-**Next Steps:**
-* Future prediction.
-* Seperate models for rare SKUs / frequent SKUs.
+**Possible Next Steps:**
+* GridSearch CatBoost params
+* Seperate models for rare SKUs / frequent SKUs (mean for rare + boosting for frequent).
