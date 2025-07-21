@@ -34,5 +34,10 @@ pyproject.toml # Poetry environment & dependencies
 
 ## Status
 
+**Done:**
 * **EDA completed.**
-* Ready for modeling and further feature engineering.
+* **Simple models tested.**
+
+**Next Steps:**
+* **Future prediction.**
+* **Seperate models for rare SKUs / frequent SKUs.**

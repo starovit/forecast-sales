@@ -62,3 +62,54 @@ def add_date_categorical_features(df, date_col='date', prefix=''):
     df[f'{prefix}quarter'] = df[date_col].dt.quarter.astype('category') # 1..4
 
     return df
+
+
+def add_rolling_mean_features(
+    df,
+    days=[7, 14, 28, 56, 112, 224],
+    columns=None,
+    groupby='sku_id',
+    date_col='date'
+):
+    """
+    Adds rolling mean features for specified columns and windows.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame.
+    days : list of int, optional
+        List of rolling window sizes (in days).
+    columns : list of str, optional
+        List of column names to compute rolling means for.
+    groupby : str, default='sku_id'
+        Column to group by before computing rolling means.
+    date_col : str, default='date'
+        Date column name.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with added rolling mean features.
+    list of str
+        Names of added rolling mean features.
+    """
+    df = df.copy()
+    df = df.sort_values([groupby, date_col])
+    feature_names = []
+
+    if columns is None:
+        raise ValueError("You must specify a list of columns for rolling means.")
+
+    for col in columns:
+        for window in days:
+            feature_name = f'{col}_roll{window}_mean'
+            df[feature_name] = (
+                df.groupby(groupby)[col]
+                .transform(lambda s: s.shift(1).rolling(window, min_periods=1).mean())
+            )
+            feature_names.append(feature_name)
+
+    df = df.sort_values(date_col)
+    return df, feature_names
+
